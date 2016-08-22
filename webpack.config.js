@@ -6,6 +6,8 @@ var packageData = require('./package.json');
 
 var minify = process.argv.indexOf('--minify') != -1;
 
+var LiveReloadPlugin = require('webpack-livereload-plugin');
+
 var filename = [packageData.name, packageData.version, 'js'];
 var plugins = [];
 
@@ -33,5 +35,10 @@ module.exports = {
         }
       ]
     },
-    plugins: plugins
+    plugins: [
+    new LiveReloadPlugin({
+      port: 35729
+
+    })
+    ]
 };

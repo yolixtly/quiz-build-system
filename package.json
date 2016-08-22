@@ -27,6 +27,7 @@
     "watch:css:minified": "npm run build:css:minified && chokidar 'dev/css/*.(css|less)' -c 'npm run build:css:minified'",
     "watch:css:unminified": "npm run build:css:unminified && chokidar 'dev/css/*.(css|less)' -c 'npm run build:css:unminified'",
     "watch:js": "npm run watch:js:unminified & npm run watch:js:minified",
+    "watch:js:minified": "npm run build:js:minified && webpack --watch --minify",
     "watch:js:unminified": "npm run build:js:unminified && webpack --watch"
   },
   "repository": {
@@ -47,7 +48,8 @@
     "less": "^2.7.1",
     "less-plugin-clean-css": "^1.5.1",
     "uglify-js": "^2.7.3",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-livereload-plugin": "^0.8.2"
   },
   "dependencies": {
     "jquery": "^3.1.0"
