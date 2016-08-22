@@ -36,9 +36,6 @@ module.exports = {
       ]
     },
     plugins: [
-    new LiveReloadPlugin({
-      port: 35729
-
-    })
+    new LiveReloadPlugin()
     ]
 };
