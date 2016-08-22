@@ -2,7 +2,7 @@
   "name": "quiz-build-system",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "dev/js/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run clean && mkdir -p build && npm run build:html && npm run build:css && npm run build:js",
@@ -10,11 +10,12 @@
     "clean": "rm -rf build",
     "clean:html": "rm -f build/index.html",
     "clean:css": "rm -f build/quiz-build-sytem.css build/quiz-build-sytem.css.map",
-    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name$npm_package_version.js.map",
-    "build:html": "npm run clean:html && cp index.html build/",
-    "build:css": "npm run clean:css && lessc --source-map style.less build/$npm_package_name$npm_page_version.css",
+    "clean:js": "rm -f build/$npm_package_name$npm_package_version.js build/$npm_package_name$npm_package_version.js.map",
+    "build:html": "npm run clean:html && cp dev/html/index.html build/",
+    "build:css": "npm run clean:css && lessc --source-map dev/css/style.less build/$npm_package_name$npm_page_version.css",
+    
     "build:js": "npm run clean:js && webpack",
-    "watch:html": "npm run build:html && chokidar index.html -c 'npm run build:html'",
+    "watch:html": "npm run build:html && chokidar dev/html/index.html -c 'npm run build:html'",
     "watch:css": "npm run build:css && chokidar **.less -c 'npm run build:css'",
     "watch:js": "npm run build:js && webpack --watch"
   },
