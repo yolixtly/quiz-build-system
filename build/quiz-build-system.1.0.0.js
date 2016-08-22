@@ -46,11 +46,11 @@
 
 	'use strict';
 	
-	var QUESTIONS = __webpack_require__(2).QUESTIONS;
+	var QUESTIONS = __webpack_require__(1).QUESTIONS;
 	
-	var showResults = __webpack_require__(1).showResults;
-	var showQuestions = __webpack_require__(1).showQuestions;
-	var setQuestion = __webpack_require__(1).setQuestion;
+	var showResults = __webpack_require__(2).showResults;
+	var showQuestions = __webpack_require__(2).showQuestions;
+	var setQuestion = __webpack_require__(2).setQuestion;
 	
 	var resetScore = __webpack_require__(3).resetScore;
 	var increaseScore = __webpack_require__(3).increaseScore;
@@ -90,45 +90,55 @@
 	    questionsTotalElement.text(QUESTIONS.length);
 	    setQuestion(0);
 	});
+	
+	//ES6 Example : 
+	//arrow example 
+	var evens = [2, 4, 6];
+	var odds = evens.map(function (v) {
+	    return v + 1;
+	});
+	console.log(odds);
+	
+	// ${example}
+	var name = "Bob";
+	var time = "today";
+	console.log('Hello ' + name + ', how are you ' + time + '?');
+	
+	//default value
+	var withDefaults = function withDefaults(x) {
+	    var y = arguments.length <= 1 || arguments[1] === undefined ? 12 : arguments[1];
+	
+	    return x + y;
+	};
+	withDefaults(3) === 15;
+	console.log(withDefaults(20));
+	
+	//rest as parameter 
+	var withRest = function withRest(x) {
+	    for (var _len = arguments.length, w = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        w[_key - 1] = arguments[_key];
+	    }
+	
+	    // y is an Array
+	    console.log(w);
+	    return x * w.length;
+	};
+	withRest(3, "hello", true) === 6;
+	console.log(withRest(2, 1, 2, 3, 4, 5));
+	
+	//spread
+	var withSpread = function withSpread(x, y, z) {
+	    return x + y + z;
+	};
+	
+	// as arguments : by passing the '...' it takes the array elemetns as indivual parameters
+	var array = [1, 2, 3];
+	withSpread.apply(undefined, array) === 6;
+	console.log(withSpread(array, 'hello', 'bye'));
+	console.log(withSpread.apply(undefined, array));
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var questionsPageElement = $('.questions-page');
-	var questionCurrentElement = $('.question-current');
-	var questionsTotalElement = $('.questions-total');
-	var questionElement = $('.question');
-	var answersElement = $('.answers');
-	
-	var resultsPageElement = $('.results-page');
-	var scoreElement = $('.score');
-	var restartButtonElement = $('.restart-button');
-	
-	var QUESTIONS = __webpack_require__(2).QUESTIONS;
-	exports.showResults = function () {
-	    questionsPageElement.hide();
-	    resultsPageElement.show();
-	};
-	exports.showQuestions = function () {
-	    resultsPageElement.hide();
-	    questionsPageElement.show();
-	};
-	exports.setQuestion = function (questionIndex) {
-	    var question = QUESTIONS[questionIndex];
-	    questionCurrentElement.text(questionIndex);
-	    questionElement.text(question.text);
-	    answersElement.empty();
-	    for (var i = 0; i < question.answers.length; i++) {
-	        var answer = question.answers[i];
-	        answersElement.append('<li><button type="button">' + answer + '</button></li>');
-	    }
-	};
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -152,6 +162,42 @@
 	}];
 	
 	exports.QUESTIONS = QUESTIONS;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var questionsPageElement = $('.questions-page');
+	var questionCurrentElement = $('.question-current');
+	var questionsTotalElement = $('.questions-total');
+	var questionElement = $('.question');
+	var answersElement = $('.answers');
+	
+	var resultsPageElement = $('.results-page');
+	var scoreElement = $('.score');
+	var restartButtonElement = $('.restart-button');
+	
+	var QUESTIONS = __webpack_require__(1).QUESTIONS;
+	exports.showResults = function () {
+	    questionsPageElement.hide();
+	    resultsPageElement.show();
+	};
+	exports.showQuestions = function () {
+	    resultsPageElement.hide();
+	    questionsPageElement.show();
+	};
+	exports.setQuestion = function (questionIndex) {
+	    var question = QUESTIONS[questionIndex];
+	    questionCurrentElement.text(questionIndex);
+	    questionElement.text(question.text);
+	    answersElement.empty();
+	    for (var i = 0; i < question.answers.length; i++) {
+	        var answer = question.answers[i];
+	        answersElement.append('<li><button type="button">' + answer + '</button></li>');
+	    }
+	};
 
 /***/ },
 /* 3 */
